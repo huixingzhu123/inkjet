@@ -179,7 +179,7 @@ ul.list-spaces li {
 }
 
 .top-space {
-    margin-top: 60px;
+    margin-top: 0px;
 }
 
 .top-margin {
@@ -187,7 +187,7 @@ ul.list-spaces li {
 }
 
 img {
-    max-width: 100%;
+    max-width: 75%;
 }
 
 img.pull-right {
@@ -554,4 +554,13 @@ color: #ee0c45;
         width: 20px;
         height: 20px;
     }
+}
+.navbar-inverse .navbar-brand img {
+    margin-top: -28px;
+}
+.row.iconColor {
+    margin-bottom: 30px;
+}
+article.col-sm-9.maincontent.pull-right {
+    margin-bottom: 64px;
 }
