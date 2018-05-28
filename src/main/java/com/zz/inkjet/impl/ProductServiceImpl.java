@@ -14,6 +14,10 @@ import com.zz.framework.service.BaseServiceImpl;
 import com.zz.inkjet.domain.Product;
 import com.zz.inkjet.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +36,10 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> {
     public ProductServiceImpl(ProductRepository productRepository) {
         super(productRepository);
         this.productRepository = productRepository;
+    }
+
+    public Page<Product> findProductNoCriteria(Integer page, Integer size) {
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "itemId");
+        return productRepository.findAll(pageable);
     }
 }

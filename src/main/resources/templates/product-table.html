@@ -8,10 +8,10 @@
     <meta name="keywords" content="table">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="icon" type="image/png" href="/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="/i/app-icon72x72@2x.png">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <link rel="stylesheet" href="/css/amazeui.min.css"/>
     <link rel="stylesheet" href="/css/admin.css">
 </head>
@@ -22,156 +22,152 @@
 <![endif]-->
 
 <!--<div class="am-cf admin-main">-->
-    <!-- content start -->
-    <div class="admin-content">
+<!-- content start -->
+<div class="admin-content">
 
-        <div class="am-cf am-padding">
-            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">产品列表</strong> / <small>Table</small></div>
-        </div>
-
-        <div class="am-g">
-            <div class="am-u-md-6 am-cf">
-                <div class="am-fl am-cf">
-                    <div class="am-btn-toolbar am-fl">
-                        <div class="am-btn-group am-btn-group-xs">
-                            <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
-                            <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
-                        </div>
-
-                        <div class="am-form-group am-margin-left am-fl">
-                            <select>
-                                <option value="option1">所有类别</option>
-                                <option value="option2">IT业界</option>
-                                <option value="option3">数码产品</option>
-                                <option value="option3">笔记本电脑</option>
-                                <option value="option3">平板电脑</option>
-                                <option value="option3">只能手机</option>
-                                <option value="option3">超极本</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="am-u-md-3 am-cf">
-                <div class="am-fr">
-                    <div class="am-input-group am-input-group-sm">
-                        <input type="text" class="am-form-field">
-                        <span class="am-input-group-btn">
-                  <button class="am-btn am-btn-default" type="button">搜索</button>
-                </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="am-g">
-            <div class="am-u-sm-12">
-                <form class="am-form">
-                    <table class="am-table am-table-striped am-table-hover table-main">
-                        <thead>
-                        <tr>
-                            <th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">类别</th><th class="table-author">作者</th><th class="table-date">修改日期</th><th class="table-set">操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><input type="checkbox" /></td>
-                            <td>1</td>
-                            <td><a href="#">Business management</a></td>
-                            <td>default</td>
-                            <td>测试1号</td>
-                            <td>2014年9月4日 7:28:47</td>
-                            <td>
-                                <div class="am-btn-toolbar">
-                                    <div class="am-btn-group am-btn-group-xs">
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                        <button class="am-btn am-btn-default am-btn-xs"><span class="am-icon-copy"></span> 复制</button>
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" /></td>
-                            <td>2</td>
-                            <td><a href="#">Business management</a></td>
-                            <td>default</td>
-                            <td>测试1号</td>
-                            <td>2014年9月4日 7:28:47</td>
-                            <td>
-                                <div class="am-btn-toolbar">
-                                    <div class="am-btn-group am-btn-group-xs">
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                        <button class="am-btn am-btn-default am-btn-xs"><span class="am-icon-copy"></span> 复制</button>
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" /></td>
-                            <td>3</td>
-                            <td><a href="#">Business management</a></td>
-                            <td>default</td>
-                            <td th:text="${name}">测试1号</td>
-                            <td th:text="${data.pagination.total}">2014年9月4日 7:28:47</td>
-                            <td>
-                                <div class="am-btn-toolbar">
-                                    <div class="am-btn-group am-btn-group-xs">
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                        <button class="am-btn am-btn-default am-btn-xs"><span class="am-icon-copy"></span> 复制</button>
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" /></td>
-                            <td>4</td>
-                            <td><a href="#">Business management</a></td>
-                            <td>default</td>
-                            <td>测试1号</td>
-                            <td>2014年9月4日 7:28:47</td>
-                            <td>
-                                <div class="am-btn-toolbar">
-                                    <div class="am-btn-group am-btn-group-xs">
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                        <button class="am-btn am-btn-default am-btn-xs"><span class="am-icon-copy"></span> 复制</button>
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" /></td>
-                            <td>5</td>
-                            <td><a href="#">Business management</a></td>
-                            <td>default</td>
-                            <td>测试1号</td>
-                            <td>2014年9月4日 7:28:47</td>
-                            <td>
-                                <div class="am-btn-toolbar">
-                                    <div class="am-btn-group am-btn-group-xs">
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                        <button class="am-btn am-btn-default am-btn-xs"><span class="am-icon-copy"></span> 复制</button>
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="am-cf">
-                        共 5 条记录
-                    </div>
-                    <hr />
-                    <p>注：.....</p>
-                </form>
-            </div>
-
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">产品列表</strong> /
+            <small>Table</small>
         </div>
     </div>
-    <!-- content end -->
+
+    <div class="am-g">
+        <div class="am-u-md-6 am-cf">
+            <div class="am-fl am-cf">
+                <div class="am-btn-toolbar am-fl">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增
+                        </button>
+                        <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除
+                        </button>
+                    </div>
+
+                    <div class="am-form-group am-margin-left am-fl">
+                        <select>
+                            <option value="option1">所有类别</option>
+                            <option value="option2">IT业界</option>
+                            <option value="option3">数码产品</option>
+                            <option value="option3">笔记本电脑</option>
+                            <option value="option3">平板电脑</option>
+                            <option value="option3">只能手机</option>
+                            <option value="option3">超极本</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-u-md-3 am-cf">
+            <div class="am-fr">
+                <div class="am-input-group am-input-group-sm">
+                    <input type="text" class="am-form-field">
+                    <span class="am-input-group-btn">
+                  <button class="am-btn am-btn-default" type="button">搜索</button>
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <form class="am-form">
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead>
+                    <tr>
+                        <th class="table-check"><input type="checkbox"/></th>
+                        <th class="table-id">ID</th>
+                        <th class="table-title">itemid</th>
+                        <th class="table-type">series</th>
+                        <th class="table-author">oemcode</th>
+                        <th class="table-date">color</th>
+                        <th class="table-set">suitablemachine</th>
+                        <th class="table-set">pageyield</th>
+                        <th class="table-set">itemtype</th>
+                        <th class="table-set">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="pduct : ${datas.getContent()}">
+                        <td><input type="checkbox"/></td>
+                        <td th:text="${pduct.systemid}">1</td>
+                        <td th:text="${pduct.itemId}">1</td>
+                        <td th:text="${pduct.series}">1</td>
+                        <td th:text="${pduct.oemCode}">1</td>
+                        <td th:text="${pduct.color}">1</td>
+                        <td th:text="${pduct.suitableMachine}">1</td>
+                        <td th:text="${pduct.pageYield}">1</td>
+                        <td th:text="${pduct.itemType}">1</td>
+                        <td>
+                            <div class="am-btn-toolbar">
+                                <div class="am-btn-group am-btn-group-xs">
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                            class="am-icon-pencil-square-o"></span> 编辑
+                                    </button>
+                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span
+                                            class="am-icon-trash-o"></span> 删除
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div th:include="page :: pager" th:remove="tag"></div>
+                <!--<div class="am-cf">
+                    &lt;!&ndash;共
+                    <text th:text="${datas.totalElements}">15</text>
+                    条记录&ndash;&gt;
+                    <div class="am-fr">
+                        <ul class="am-pagination">
+                            <li><a href="#" th:href="@{${curUrl}(page=0)}">首页</a></li>
+                            <li th:class="${datas.hasPrevious()}? '':'am-disabled'">
+                                <a href="#">«</a></li>
+                            &lt;!&ndash;<li class="am-active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">»</a></li>&ndash;&gt;
+
+                            &lt;!&ndash;总页数小于等于10&ndash;&gt;
+                            <div th:if="${(datas.totalPages le 10) and (datas.totalPages gt 0)}" th:remove="tag">
+                                <div th:each="pg : ${#numbers.sequence(0, datas.totalPages - 1)}" th:remove="tag">
+                                    <span th:if="${pg eq datas.getNumber()}" th:remove="tag">
+                                        <li class="am-active">
+                                            <span class="current_page line_height" th:text="${pg + 1}">${pageNumber}</span>
+                                        </li>
+                                    </span>
+                                    <span th:unless="${pg eq datas.getNumber()}" th:remove="tag">
+                                        <li><a href="#"  th:text="${pg + 1}"></a></li>
+                                    </span>
+                                </div>
+                            </div>
+
+                            &lt;!&ndash; 总数数大于10时 &ndash;&gt;
+                            <div th:if="${datas.totalPages gt 10}" th:remove="tag">
+                                <li th:if="${datas.number - 2 ge 0}"><a href="#"  th:text="${datas.number - 1}"></a></li>
+                                <li th:if="${datas.number - 1 ge 0}"><a href="#"  th:text="${datas.number}"></a></li>
+                                <li class="am-active"><span class="current_page line_height" th:text="${datas.number + 1}"></span></li>
+                                <li th:if="${datas.number+1 lt datas.totalPages}"><a href="#"  th:text="${datas.number + 2}"></a></li>
+                                <li th:if="${datas.number+2 lt datas.totalPages}"><a href="#"  th:text="${datas.number + 3}"></a></li>
+                            </div>
+
+                            <li th:class="${datas.hasNext()}? '':'am-disabled'">
+                                <a href="#">»</a></li>
+                            <li><a href="#" th:href="${datas.totalPages le 0 ? curUrl+'page=0':curUrl+'&amp;page='+(datas.totalPages - 1)}">尾页</a></li>
+                            <li><span th:utext="'共'+${datas.totalPages}+'页 / '+${datas.totalElements}+' 条'"></span></li>
+                        </ul>
+                    </div>
+                </div>-->
+                <hr/>
+                <p>注：.....</p>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- content end -->
 <!--</div>-->
 
 <!--[if lt IE 9]>

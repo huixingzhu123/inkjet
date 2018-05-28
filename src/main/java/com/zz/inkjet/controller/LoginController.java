@@ -12,15 +12,18 @@ package com.zz.inkjet.controller;
 
 import com.zz.framework.result.pagination.Pagination;
 import com.zz.framework.result.pagination.PaginationSuccessDTO;
+import com.zz.inkjet.domain.Product;
 import com.zz.inkjet.domain.User;
 import com.zz.inkjet.impl.ProductServiceImpl;
 import com.zz.inkjet.impl.UserServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,11 +51,30 @@ public class LoginController {
         return "main-index";
     }
 
+    @RequestMapping("/admin-table")
+    public String adminTable() {
+
+        return "admin-table";
+    }
+
+    @RequestMapping("/admin-form")
+    public String adminForm() {
+
+        return "admin-form";
+    }
+
+    @RequestMapping("/admin-index")
+    public String adminIndex() {
+
+        return "admin-index";
+    }
+
     @RequestMapping("/product-table")
-    public String productTable(Model model) {
-        Pagination pagination = new Pagination(1,2);
-        PaginationSuccessDTO data = productService.getEntices(pagination, "createdTime-d");
-        model.addAttribute("data", data) ;
+    public String productTable(Model model,@RequestParam(value = "page", defaultValue = "0") Integer page,
+                               @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        Pagination pagination = new Pagination(1,10);
+        Page<Product> datas = productService.findProductNoCriteria(page, size);
+        model.addAttribute("datas", datas) ;
         model.addAttribute("name", "hahahahaha");
         return "product-table";
     }
