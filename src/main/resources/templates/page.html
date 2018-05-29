@@ -33,14 +33,15 @@
 
                 <!-- 总数数大于10时 -->
                 <div th:if="${datas.totalPages gt 10}" th:remove="tag">
+                    <li th:if="${datas.number - 4 ge 0 && datas.number + 1 ge datas.totalPages}"><a href="#" th:href="@{${curUrl}(page=${datas.number}-4)}" th:text="${datas.number - 3}"></a></li>
+                    <li th:if="${datas.number - 3 ge 0 && datas.number + 2 ge datas.totalPages}"><a href="#" th:href="@{${curUrl}(page=${datas.number}-3)}" th:text="${datas.number - 2}"></a></li>
                     <li th:if="${datas.number - 2 ge 0}"><a href="#" th:href="@{${curUrl}(page=${datas.number}-2)}" th:text="${datas.number - 1}"></a></li>
                     <li th:if="${datas.number - 1 ge 0}"><a href="#" th:href="@{${curUrl}(page=${datas.number}-1)}" th:text="${datas.number}"></a></li>
-                    <li class="am-active"><span class="current_page line_height" th:text="${datas.number + 1}"></span>
-                    </li>
-                    <li th:if="${datas.number+1 lt datas.totalPages}"><a href="#" th:href="@{${curUrl}(page=${datas.number}+1)}" th:text="${datas.number + 2}"></a>
-                    </li>
-                    <li th:if="${datas.number+2 lt datas.totalPages}"><a href="#" th:href="@{${curUrl}(page=${datas.number}+2)}" th:text="${datas.number + 3}"></a>
-                    </li>
+                    <li class="am-active"><span class="current_page line_height" th:text="${datas.number + 1}"></span></li>
+                    <li th:if="${datas.number+1 lt datas.totalPages}"><a href="#" th:href="@{${curUrl}(page=${datas.number}+1)}" th:text="${datas.number + 2}"></a></li>
+                    <li th:if="${datas.number+2 lt datas.totalPages}"><a href="#" th:href="@{${curUrl}(page=${datas.number}+2)}" th:text="${datas.number + 3}"></a></li>
+                    <li th:if="${datas.number+3 lt datas.totalPages && datas.number-2 lt 0}"><a href="#" th:href="@{${curUrl}(page=${datas.number}+3)}" th:text="${datas.number + 4}"></a></li>
+                    <li th:if="${datas.number+4 lt datas.totalPages && datas.number-1 lt 0}"><a href="#" th:href="@{${curUrl}(page=${datas.number}+4)}" th:text="${datas.number + 5}"></a></li>
                 </div>
 
                 <li th:class="${datas.hasNext()}? '':'am-disabled'">
