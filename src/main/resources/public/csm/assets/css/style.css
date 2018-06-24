@@ -147,10 +147,10 @@ label {
 }
 
 .jumbotron {
-    background-color: #E0E0E0;
+    background-color: #ffffff;
 }
 .jumbotron.top-space {
-    margin: 10px 190px;
+    margin: 10px auto;
 }
 
 .page-title {
