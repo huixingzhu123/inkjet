@@ -1,10 +1,15 @@
-function goToProduct(kind) {
+function goToProducts(kind) {
     window.location.href = "Products.html?kind=" + kind;
 }
 
-function goToProducts(kind) {
+function showProducts() {
+    var kind = document.getElementById("cartridgeType").value;
+    getProducts(kind);
+}
+
+function getProducts(kind) {
     $.ajax({
-        url: "http://localhost:8080/Product/getProduct",
+        url: "/Product/getProduct",
         type: "POST",
         // contentType: "application/json;charset=utf-8",
         data: {'kind': kind},
@@ -57,7 +62,7 @@ function getMore() {
     var page = number + 1;
     var kind = document.getElementById("cartridgeType").value;
     $.ajax({
-        url: "http://localhost:8080/Product/getProduct",
+        url: "/Product/getProduct",
         type: "POST",
         data: {'kind': kind, 'page': page},
         dataType: "json",
@@ -101,4 +106,17 @@ function getMore() {
             $(".notice").html('Error:' + msg);
         }
     })
+}
+
+function GetRequest() {
+    var url = location.search; //获取url中"?"符后的字串
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for(var i = 0; i < strs.length; i ++) {
+            theRequest[strs[i].split("=")[0]]=strs[i].split("=")[1];
+        }
+    }
+    return theRequest;
 }

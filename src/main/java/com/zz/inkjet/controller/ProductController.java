@@ -93,7 +93,6 @@ public class ProductController {
                                             @RequestParam(value="kind") String kind) {
         Product product = new Product();
         product.setCartridgeType(kind);
-        System.out.println(kind);
 //        Pagination pagination = new Pagination(1,20);
         Page<Product> datas = productService.findProductCriteria(page, size, product);
         model.addAttribute("datas", datas) ;
