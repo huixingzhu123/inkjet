@@ -2,6 +2,7 @@ package com.zz.framework.repository;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ import java.util.Map;
  * @date 2017.09.29
  */
 @NoRepositoryBean
-public interface DefaultRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
+public interface DefaultRepository<T, ID extends Serializable> extends JpaRepository<T, ID>, JpaSpecificationExecutor<T> {
     /**
      * 根据主键获取实体
      *

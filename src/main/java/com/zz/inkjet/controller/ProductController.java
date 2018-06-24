@@ -12,13 +12,16 @@ package com.zz.inkjet.controller;
 
 import com.zz.framework.domain.ListEntity;
 import com.zz.framework.exception.ValidException;
+import com.zz.framework.result.pagination.Pagination;
 import com.zz.inkjet.domain.Product;
 import com.zz.inkjet.impl.ProductServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -82,5 +85,19 @@ public class ProductController {
     @RequestMapping(value = "/products/{systemid}", method = RequestMethod.GET)
     public ResponseEntity<Product> getBySystemId(@PathVariable("systemid") String systemid) throws Exception {
         return ResponseEntity.ok(productService.getBySystemid(systemid));
+    }
+
+    @RequestMapping(value = "/getProduct",method = {RequestMethod.GET,RequestMethod.POST})
+    public ResponseEntity productTableQuery(Model model, @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                    @RequestParam(value = "size", defaultValue = "20") Integer size,
+                                            @RequestParam(value="kind") String kind) {
+        Product product = new Product();
+        product.setCartridgeType(kind);
+        System.out.println(kind);
+//        Pagination pagination = new Pagination(1,20);
+        Page<Product> datas = productService.findProductCriteria(page, size, product);
+        model.addAttribute("datas", datas) ;
+
+        return ResponseEntity.ok(datas);
     }
 }

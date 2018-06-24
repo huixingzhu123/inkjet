@@ -13,6 +13,7 @@ package com.zz.inkjet.controller;
 import com.zz.framework.result.pagination.Pagination;
 import com.zz.framework.result.pagination.PaginationSuccessDTO;
 import com.zz.inkjet.domain.Product;
+import com.zz.inkjet.domain.QueryProduct;
 import com.zz.inkjet.domain.User;
 import com.zz.inkjet.impl.ProductServiceImpl;
 import com.zz.inkjet.impl.UserServiceImpl;
@@ -22,7 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,11 +74,22 @@ public class LoginController {
 
     @RequestMapping("/product-table")
     public String productTable(Model model,@RequestParam(value = "page", defaultValue = "0") Integer page,
-                               @RequestParam(value = "size", defaultValue = "10") Integer size) {
+                               @RequestParam(value = "size", defaultValue = "10") Integer size, Product product) {
         Pagination pagination = new Pagination(1,10);
         Page<Product> datas = productService.findProductNoCriteria(page, size);
         model.addAttribute("datas", datas) ;
         model.addAttribute("name", "hahahahaha");
+        return "product-table";
+    }
+
+    @RequestMapping(value = "/findProductQuery",method = {RequestMethod.GET,RequestMethod.POST})
+    public String productTableQuery(Model model,@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                    @RequestParam(value = "size", defaultValue = "10") Integer size,
+                                    Product product) {
+        Pagination pagination = new Pagination(1,10);
+        Page<Product> datas = productService.findProductCriteria(page, size, product);
+        model.addAttribute("datas", datas) ;
+
         return "product-table";
     }
 
