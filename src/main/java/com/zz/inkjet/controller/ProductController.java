@@ -87,15 +87,19 @@ public class ProductController {
         return ResponseEntity.ok(productService.getBySystemid(systemid));
     }
 
-    @RequestMapping(value = "/getProduct",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/getProduct", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity productTableQuery(Model model, @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                    @RequestParam(value = "size", defaultValue = "20") Integer size,
-                                            @RequestParam(value="kind") String kind) {
+                                            @RequestParam(value = "size", defaultValue = "20") Integer size,
+                                            @RequestParam(value = "kind") String kind, @RequestParam(value = "itemId") String itemId,
+                                            @RequestParam(value = "oemCode") String oemCode, @RequestParam(value = "suitableMachine") String suitableMachine) {
         Product product = new Product();
         product.setCartridgeType(kind);
+        product.setItemId(itemId);
+        product.setOemCode(oemCode);
+        product.setSuitableMachine(suitableMachine);
 //        Pagination pagination = new Pagination(1,20);
         Page<Product> datas = productService.findProductCriteria(page, size, product);
-        model.addAttribute("datas", datas) ;
+        model.addAttribute("datas", datas);
 
         return ResponseEntity.ok(datas);
     }

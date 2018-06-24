@@ -122,32 +122,62 @@
 
     </div>
     <section>
-        <h2 class="sub-header">{#替换底部表格}Section title</h2>
-        <div class="am-form-group am-margin-left am-fl">
-            <select id="cartridgeType" value="InkCartridge">
-                <option value="InkCartridge">InkCartridge</option>
-                <option value="TonerCartridge">TonerCartridge</option>
-                <option value="DrumCartridge">DrumCartridge</option>
-                <option value="EmptyCartridge">EmptyCartridge</option>
-            </select>
+        <div>
+            <div id="toolbar-btn" class="btn-group pull-left" style="padding-bottom:10px;">
+                <select id="cartridgeType" value="InkCartridge">
+                    <option value="InkCartridge">InkCartridge</option>
+                    <option value="TonerCartridge">TonerCartridge</option>
+                    <option value="DrumCartridge">DrumCartridge</option>
+                    <option value="EmptyCartridge">EmptyCartridge</option>
+                </select>
+            </div>
+
+            <div class="pull-right" id="query-form" style="padding-bottom:10px;">
+                <input id="itemId" name="itemId" placeholder='Item ID' type="text"
+                       style="float:left;width:150px;margin-right:5px;"
+                       class="form-control">
+                <div style="float:left;margin-right:5px;">
+                    <input id="oemCode" name="oemCode" placeholder='OEM Code' type="text"
+                           style="float:left;width:150px;margin-right:5px;"
+                           class="form-control">
+                </div>
+                <div style="float:left;margin-right:5px;">
+                    <input id="suitableMachine" name="suitableMachine" placeholder='Suitable Machine' type="text"
+                           style="float:left;width:150px;margin-right:5px;"
+                           class="form-control">
+                </div>
+
+                <div class="btn-group">
+                    <button id="btn_search" onclick="searchProducts()" type="button" class="btn btn-primary btn-space">
+                        <span class="fa fa-search" aria-hidden="true" class="btn-icon-space"></span>
+                        QUERY
+                    </button>
+                    <button id="btn_reset" onclick="resetSearch()" type="button" class="btn btn-default btn-space">
+                        <span class="fa fa-eraser" aria-hidden="true" class="btn-icon-space"></span>
+                        RESET
+                    </button>
+                </div>
+
+            </div>
         </div>
         <div class="table-responsive">
             <table class="table table-striped" style="TABLE-LAYOUT:fixed;WORD-BREAK:break-all">
                 <thead>
                 <tr>
-                    <th width="12.5%">#</th>
-                    <th width="12.5%">itemid</th>
-                    <th width="12.5%">series</th>
-                    <th width="12.5%">oemcode</th>
-                    <th width="12.5%">color</th>
-                    <th width="12.5%">suitablemachine</th>
-                    <th width="12.5%">pageyield</th>
-                    <th width="12.5%">itemtype</th>
+                    <th width="15%">No.</th>
+                    <th width="17%">Item ID</th>
+                    <th width="17%">OEM Code</th>
+                    <th width="17%">color</th>
+                    <th width="17%">Suitable Machine</th>
+                    <th width="17%">Page Yield</th>
                 </tr>
                 </thead>
                 <tbody id="productsBody">
                 </tbody>
             </table>
+        </div>
+        <div align="center">
+            <p onclick="getMoreProducts()">--VIEW MORE--</p>
         </div>
     </section>
 </div>    <!-- /container -->
@@ -246,12 +276,8 @@
         var cs = GetRequest();
         if (cs.kind != null && cs.kind != "") {
             document.getElementById("cartridgeType").value = cs.kind;
-            getProducts(cs.kind);
-        } else {
-            showProducts();
         }
-
-        // alert(cs.kind);
+        searchProducts();
     });
 </script>
 </body>

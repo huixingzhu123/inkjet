@@ -59,13 +59,16 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> {
             public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> list = new ArrayList<Predicate>();
                 if(null != product.getItemId() && !"".equals(product.getItemId())){
-                    list.add(criteriaBuilder.equal(root.get("itemId").as(String.class),"%" + product.getItemId() + "%"));
+                    list.add(criteriaBuilder.like(root.get("itemId").as(String.class),"%" + product.getItemId() + "%"));
                 }
                 if(null != product.getCartridgeType() && !"".equals(product.getCartridgeType())) {
-                    list.add(criteriaBuilder.like(root.get("cartridgeType").as(String.class),"%" + product.getCartridgeType() + "%"));
+                    list.add(criteriaBuilder.equal(root.get("cartridgeType").as(String.class),product.getCartridgeType()));
                 }
                 if(null != product.getOemCode() && !"".equals(product.getOemCode())) {
                     list.add(criteriaBuilder.like(root.get("oemCode").as(String.class),"%" + product.getOemCode() + "%"));
+                }
+                if(null != product.getSuitableMachine() && !"".equals(product.getSuitableMachine())) {
+                    list.add(criteriaBuilder.like(root.get("suitableMachine").as(String.class),"%" + product.getSuitableMachine() + "%"));
                 }
                 Predicate[] p = new Predicate[list.size()];
                 return criteriaBuilder.and(list.toArray(p));
