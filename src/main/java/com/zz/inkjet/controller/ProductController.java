@@ -12,7 +12,7 @@ package com.zz.inkjet.controller;
 
 import com.zz.framework.domain.ListEntity;
 import com.zz.framework.exception.ValidException;
-import com.zz.framework.result.pagination.Pagination;
+import com.zz.framework.support.Constants;
 import com.zz.inkjet.domain.Product;
 import com.zz.inkjet.impl.ProductServiceImpl;
 import org.apache.commons.logging.Log;
@@ -26,6 +26,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by zengweiqiang on 2018/5/1.
@@ -102,5 +104,19 @@ public class ProductController {
         model.addAttribute("datas", datas);
 
         return ResponseEntity.ok(datas);
+    }
+
+    @RequestMapping(value = "/products/{systemids}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> physicalRemove(@PathVariable("systemids") String systemids) throws Exception {
+        Map<String, String> mapDto = new HashMap<String, String>();
+        mapDto.put("success", "0");
+
+        try {
+            productService.physicalRemove(systemids.split(Constants.SPLIT_COMMA));
+            mapDto.put("success", "1");
+        } catch (Exception e) {
+        }
+        //返回204
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(mapDto);
     }
 }

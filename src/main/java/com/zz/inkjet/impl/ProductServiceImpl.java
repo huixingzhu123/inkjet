@@ -21,6 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -48,18 +49,21 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> {
     }
 
     public Page<Product> findProductNoCriteria(Integer page, Integer size) {
-        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "systemid");
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "pid");
         return productRepository.findAll(pageable);
     }
 
     public Page<Product> findProductCriteria(Integer page, Integer size, Product product) {
-        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "systemid");
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "pid");
         Page<Product> productPage = productRepository.findAll(new Specification<Product>(){
             @Override
             public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> list = new ArrayList<Predicate>();
                 if(null != product.getItemId() && !"".equals(product.getItemId())){
                     list.add(criteriaBuilder.like(root.get("itemId").as(String.class),"%" + product.getItemId() + "%"));
+                }
+                if(null != product.getPid() && !"".equals(product.getPid())){
+                    list.add(criteriaBuilder.like(root.get("pid").as(String.class), "%" + product.getPid() + "%"));
                 }
                 if(null != product.getCartridgeType() && !"".equals(product.getCartridgeType())) {
                     list.add(criteriaBuilder.equal(root.get("cartridgeType").as(String.class),product.getCartridgeType()));
@@ -75,5 +79,11 @@ public class ProductServiceImpl extends BaseServiceImpl<Product> {
             }
         },pageable);
         return productPage;
+    }
+
+
+    public void physicalRemove(String[] systemids) {
+
+        this.productRepository.deleteBySystemidIn(systemids);
     }
 }

@@ -22,6 +22,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PRODUCTS")
 public class Product  extends AuditEntity {
+    @Column(name="pid")
+    private String pid;
     @Column(name="ITEMID")
     private String itemId;
     @Column(name="cartridgetype")
@@ -36,17 +38,21 @@ public class Product  extends AuditEntity {
     private String pageYield;
     @Column(name="itemtype")
     private String itemType;
-    private Integer order;
+    @Column(name="sortnum")
+    private Integer sortNum;
     private String remarks;
     @Column(name="newarrival")
     private String newArrival;
 
-    public Integer getOrder() {
-        return order;
+    public Product() {
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public Integer getSortNum() {
+        return sortNum;
+    }
+
+    public void setSortNum(Integer sortNum) {
+        this.sortNum = sortNum;
     }
 
     public String getItemId() {
@@ -128,5 +134,13 @@ public class Product  extends AuditEntity {
 
     public void setNewArrival(String newArrival) {
         this.newArrival = newArrival;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 }

@@ -1,13 +1,13 @@
-(function($) {
-  'use strict';
+(function ($) {
+    'use strict';
 
-  $(function() {
-    var $fullText = $('.admin-fullText');
-    $('#admin-fullscreen').on('click', function() {
-      $.AMUI.fullscreen.toggle();
-      $.AMUI.fullscreen.isFullscreen ? $fullText.text('关闭全屏') : $fullText.text('开启全屏');
+    $(function () {
+        var $fullText = $('.admin-fullText');
+        $('#admin-fullscreen').on('click', function () {
+            $.AMUI.fullscreen.toggle();
+            $.AMUI.fullscreen.isFullscreen ? $fullText.text('关闭全屏') : $fullText.text('开启全屏');
+        });
     });
-  });
 })(jQuery);
 
 function setIframeHeight(iframe) {
@@ -20,5 +20,6 @@ function setIframeHeight(iframe) {
 };
 
 function iframeChange(path) {
-    $("#contentIframe").attr("src",path) ;
+    $("#contentIframe").attr("src", path);
 }
+

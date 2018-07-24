@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by zengweiqiang on 2018/4/25.
@@ -75,21 +77,31 @@ public class LoginController {
     @RequestMapping("/product-table")
     public String productTable(Model model,@RequestParam(value = "page", defaultValue = "0") Integer page,
                                @RequestParam(value = "size", defaultValue = "10") Integer size, Product product) {
-        Pagination pagination = new Pagination(1,10);
+        Pagination pagination = new Pagination(page,size);
         Page<Product> datas = productService.findProductNoCriteria(page, size);
         model.addAttribute("datas", datas) ;
-        model.addAttribute("name", "hahahahaha");
+        model.addAttribute("queryForm", product);
         return "product-table";
     }
 
     @RequestMapping(value = "/findProductQuery",method = {RequestMethod.GET,RequestMethod.POST})
     public String productTableQuery(Model model,@RequestParam(value = "page", defaultValue = "0") Integer page,
                                     @RequestParam(value = "size", defaultValue = "10") Integer size,
-                                    Product product) {
-        Pagination pagination = new Pagination(1,10);
+                                    @RequestParam(value = "cartridgeType") String cartridgeType,
+                                    @RequestParam(value = "pid") String pid,
+                                    @RequestParam(value = "itemId") String itemId,
+                                    @RequestParam(value = "oemCode") String oemCode,
+                                    @RequestParam(value = "suitableMachine") String suitableMachine) {
+        Pagination pagination = new Pagination(page,size);
+        Product product = new Product();
+        product.setCartridgeType(cartridgeType);
+        product.setPid(pid);
+        product.setItemId(itemId);
+        product.setOemCode(oemCode);
+        product.setSuitableMachine(suitableMachine);
         Page<Product> datas = productService.findProductCriteria(page, size, product);
         model.addAttribute("datas", datas) ;
-
+        model.addAttribute("queryForm", product);
         return "product-table";
     }
 

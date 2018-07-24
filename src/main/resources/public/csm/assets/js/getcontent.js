@@ -29,7 +29,7 @@ function getMoreProducts() {
             for (var i = 0; i < products.length; i++) {
                 var tr = document.createElement("tr");
                 var td1 = document.createElement("td");
-                td1.innerText = products[i].systemid;
+                td1.innerText = products[i].pid;
                 var td2 = document.createElement("td");
                 td2.innerText = products[i].itemId;
                 var td3 = document.createElement("td");
@@ -73,7 +73,7 @@ function getProducts(kind) {
             for (var i = 0; i < products.length; i++) {
                 var tr = document.createElement("tr");
                 var td1 = document.createElement("td");
-                td1.innerText = products[i].systemid;
+                td1.innerText = products[i].pid;
                 var td2 = document.createElement("td");
                 td2.innerText = products[i].itemId;
                 var td3 = document.createElement("td");
@@ -119,7 +119,7 @@ function getMore() {
             for (var i = 0; i < products.length; i++) {
                 var tr = document.createElement("tr");
                 var td1 = document.createElement("td");
-                td1.innerText = products[i].systemid;
+                td1.innerText = products[i].pid;
                 var td2 = document.createElement("td");
                 td2.innerText = products[i].itemId;
                 var td3 = document.createElement("td");
