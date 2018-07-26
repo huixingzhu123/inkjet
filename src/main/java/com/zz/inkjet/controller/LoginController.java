@@ -12,23 +12,26 @@ package com.zz.inkjet.controller;
 
 import com.zz.framework.result.pagination.Pagination;
 import com.zz.framework.result.pagination.PaginationSuccessDTO;
+import com.zz.inkjet.domain.B_Contact_Msg;
 import com.zz.inkjet.domain.Product;
 import com.zz.inkjet.domain.QueryProduct;
 import com.zz.inkjet.domain.User;
+import com.zz.inkjet.dto.MessageDto;
+import com.zz.inkjet.impl.B_Contact_MsgServiceImpl;
 import com.zz.inkjet.impl.ProductServiceImpl;
 import com.zz.inkjet.impl.UserServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +52,8 @@ public class LoginController {
 
     @Autowired
     public ProductServiceImpl productService;
+    @Autowired
+    public B_Contact_MsgServiceImpl msgService;
 
     @RequestMapping("/index")
     public String index() {
@@ -111,10 +116,36 @@ public class LoginController {
         return "news-table";
     }
 
-    @RequestMapping("/contact-table")
-    public String contactTable() {
+    @RequestMapping(value = "/contact-table")
+    public String contactTable(Model model,@RequestParam(value = "page", defaultValue = "0") Integer page,
+                               @RequestParam(value = "size", defaultValue = "10") Integer size,
+                               @RequestParam(value = "name", defaultValue = "") String name,
+                               @RequestParam(value = "email", defaultValue = "") String email,
+                               @RequestParam(value = "startTime", defaultValue = "") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,
+                               @RequestParam(value = "endTime", defaultValue = "") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime
+                                ) {
+        MessageDto dto = new MessageDto();
+        dto.setEmail(email);
+        dto.setName(name);
+        dto.setStartTime(startTime);
+        dto.setEndTime(endTime);
+        Pagination pagination = new Pagination(page,size);
+        Page<B_Contact_Msg> datas = msgService.findMsgCriteria(page,size,dto);
+        model.addAttribute("datas", datas) ;
+        model.addAttribute("queryForm", dto);
         return "contact-table";
     }
+
+//    @RequestMapping(value = "/contact-table",method = RequestMethod.POST)
+//    public String contactPostTable(Model model,@RequestParam(value = "page", defaultValue = "0") Integer page,
+//                                   @RequestParam(value = "size", defaultValue = "10") Integer size,
+//                                   @ModelAttribute MessageDto dto) {
+//        Pagination pagination = new Pagination(page,size);
+//        Page<B_Contact_Msg> datas = msgService.findMsgCriteria(page,size,dto);
+//        model.addAttribute("datas", datas) ;
+//        model.addAttribute("queryForm", dto);
+//        return "contact-table";
+//    }
 
     @RequestMapping("/login")
     public String login(HttpServletRequest request) {

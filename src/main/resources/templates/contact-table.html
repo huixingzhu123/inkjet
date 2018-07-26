@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html xmlns:th="http://www.thymeleaf.org" class="no-js">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,12 +8,14 @@
     <meta name="keywords" content="table">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="icon" type="image/png" href="/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="/i/app-icon72x72@2x.png">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <link rel="stylesheet" href="/css/amazeui.min.css"/>
     <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/js/datetimepicker/bootstrap-datetimepicker.min.css">
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -26,7 +28,9 @@
 <div class="admin-content">
 
     <div class="am-cf am-padding">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">联系列表</strong> / <small>Table</small></div>
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">联系列表</strong> /
+            <small>客户消息</small>
+        </div>
     </div>
 
     <div class="am-g">
@@ -34,35 +38,69 @@
             <div class="am-fl am-cf">
                 <div class="am-btn-toolbar am-fl">
                     <div class="am-btn-group am-btn-group-xs">
-                        <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
-                        <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
+                        <button type="button" class="am-btn am-btn-default" onclick="batchDelete()"><span class="am-icon-trash-o"></span> 删除
+                        </button>
                     </div>
-
-                    <div class="am-form-group am-margin-left am-fl">
-                        <select>
-                            <option value="option1">所有类别</option>
-                            <option value="option2">IT业界</option>
-                            <option value="option3">数码产品</option>
-                            <option value="option3">笔记本电脑</option>
-                            <option value="option3">平板电脑</option>
-                            <option value="option3">只能手机</option>
-                            <option value="option3">超极本</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="am-u-md-3 am-cf">
-            <div class="am-fr">
-                <div class="am-input-group am-input-group-sm">
-                    <input type="text" class="am-form-field">
-                    <span class="am-input-group-btn">
-                  <button class="am-btn am-btn-default" type="button">搜索</button>
-                </span>
                 </div>
             </div>
         </div>
     </div>
+
+    <form class="am-form" id="query-form" action="/back/contact-table" method="post">
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-2 am-text-right">
+                姓名：
+            </div>
+            <div class="am-u-sm-4">
+                <input type="text" id="name" name="name" th:value="${queryForm.name}" class="am-input-sm" placeholder="NAME">
+            </div>
+            <div class="am-u-sm-2 am-text-right">
+                邮箱：
+            </div>
+            <div class="am-u-sm-4">
+                <input type="text" id="email" name="email" th:value="${queryForm.email}" class="am-input-sm" placeholder="EMAIL">
+            </div>
+        </div>
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-2 am-text-right">
+                联系时间：
+            </div>
+            <div class="am-u-sm-4" style="display: -webkit-inline-box;padding-left:0px">
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="startTime" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" th:value="${#dates.format(queryForm.getStartTime(),'yyyy-MM-dd')}" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <input type="hidden" id="startTime" name="startTime" th:value="${#dates.format(queryForm.getStartTime(),'yyyy-MM-dd')}" />~
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd" data-link-field="endTime" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" th:value="${#dates.format(queryForm.getEndTime(),'yyyy-MM-dd')}" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <input type="hidden" id="endTime" name="endTime" th:value="${#dates.format(queryForm.getEndTime(),'yyyy-MM-dd')}" />
+            </div>
+            <div class="am-u-sm-2 am-text-left">
+
+            </div>
+        </div>
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-10" style="text-align: center">
+                <button class="am-btn am-btn-default" type="button" onclick="searchMsg()">搜索</button>
+                <button class="am-btn am-btn-default" type="button" onclick="resetSearch()">重置条件</button>
+            </div>
+        </div>
+    </form>
+
+    <!--<div class="am-u-md-3 am-cf">
+        <div class="am-fr">
+            <div class="am-input-group">
+                <input type="text" class="am-form-field">
+                <input type="text" class="am-form-field">
+                <input type="text" class="am-form-field">
+                <span class="am-input-group-btn">
+                        <button class="am-btn am-btn-default" type="button">搜索</button>
+                    </span>
+            </div>
+        </div>
+    </div>-->
 
     <div class="am-g">
         <div class="am-u-sm-12">
@@ -70,101 +108,30 @@
                 <table class="am-table am-table-striped am-table-hover table-main">
                     <thead>
                     <tr>
-                        <th class="table-check"><input type="checkbox" /></th><th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">类别</th><th class="table-author">作者</th><th class="table-date">修改日期</th><th class="table-set">操作</th>
+                        <th class="table-check"><input type="checkbox" onclick="checkAll(this)"/></th>
+                        <th class="table-id">姓名</th>
+                        <th class="table-title">邮箱</th>
+                        <th class="table-date">联系时间</th>
+                        <th class="table-title">消息</th>
+                        <th class="table-set">操作</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>1</td>
-                        <td><a href="#">Business management</a></td>
-                        <td>default</td>
-                        <td>测试1号</td>
-                        <td>2014年9月4日 7:28:47</td>
+                    <tbody id="tbody">
+                    <tr th:each="msg : ${datas.getContent()}">
+                        <td><input type="checkbox" name="systemid" th:value="${msg.systemid}"/></td>
+                        <td><span name="name" th:text="${msg.name}"></span></td>
+                        <td><span name="email" th:text="${msg.email}"></span></td>
+                        <td><span name="createdTime" th:text="${msg.createdTime}"></span></td>
+                        <td><span name="message" th:text="${msg.message}"></span></td>
                         <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                    <button class="am-btn am-btn-default am-btn-xs"><span class="am-icon-copy"></span> 复制</button>
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>2</td>
-                        <td><a href="#">Business management</a></td>
-                        <td>default</td>
-                        <td>测试1号</td>
-                        <td>2014年9月4日 7:28:47</td>
-                        <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                    <button class="am-btn am-btn-default am-btn-xs"><span class="am-icon-copy"></span> 复制</button>
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>3</td>
-                        <td><a href="#">Business management</a></td>
-                        <td>default</td>
-                        <td>测试1号</td>
-                        <td>2014年9月4日 7:28:47</td>
-                        <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                    <button class="am-btn am-btn-default am-btn-xs"><span class="am-icon-copy"></span> 复制</button>
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>4</td>
-                        <td><a href="#">Business management</a></td>
-                        <td>default</td>
-                        <td>测试1号</td>
-                        <td>2014年9月4日 7:28:47</td>
-                        <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                    <button class="am-btn am-btn-default am-btn-xs"><span class="am-icon-copy"></span> 复制</button>
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>5</td>
-                        <td><a href="#">Business management</a></td>
-                        <td>default</td>
-                        <td>测试1号</td>
-                        <td>2014年9月4日 7:28:47</td>
-                        <td>
-                            <div class="am-btn-toolbar">
-                                <div class="am-btn-group am-btn-group-xs">
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
-                                    <button class="am-btn am-btn-default am-btn-xs"><span class="am-icon-copy"></span> 复制</button>
-                                    <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-                                </div>
-                            </div>
+                            <button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger" onclick="deleteSingle(this)"><span
+                                    class="am-icon-trash-o"></span> 删除
+                            </button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <div class="am-cf">
-                    共 5 条记录
-                </div>
-                <hr />
+                <div th:include="page :: pager" th:remove="tag"></div>
                 <p>注：.....</p>
             </form>
         </div>
@@ -183,9 +150,13 @@
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-1.8.3.min.js"></script>
 <script src="/js/amazeui.min.js"></script>
 <!--<![endif]-->
 <script src="/js/app.js"></script>
+<script src="/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/message.js"></script>
+
 </body>
 </html>

@@ -39,7 +39,6 @@ function deleteSingle(obj) {
             alert("删除时发生错误！");
         }
     }
-
 }
 
 function deleteByIds(ids) {

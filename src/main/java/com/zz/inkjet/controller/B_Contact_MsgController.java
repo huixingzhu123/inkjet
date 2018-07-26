@@ -19,6 +19,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * rest控制器
@@ -141,7 +143,7 @@ public class B_Contact_MsgController {
 
 
     /**
-     * 逻辑删除
+     * 物理删除
      *
      * @param ids id组，英文逗号分隔
      * @return 响应体
@@ -149,9 +151,16 @@ public class B_Contact_MsgController {
     //@Transactional
     @Logging
     @RequestMapping(value = "/contact/{ids}", method = RequestMethod.DELETE)
-    public ResponseEntity logicRemove(@PathVariable("ids") String ids) throws Exception {
-        b_Contact_MsgService.logicRemove(ids.split(Constants.SPLIT_COMMA));
+    public ResponseEntity physicalRemove(@PathVariable("ids") String ids) throws Exception {
+        Map<String, String> mapDto = new HashMap<String, String>();
+        mapDto.put("success", "0");
+        try {
+            b_Contact_MsgService.logicRemove(ids.split(Constants.SPLIT_COMMA));
+            mapDto.put("success", "1");
+        } catch (Exception e) {
+
+        }
         //返回204
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(mapDto);
     }
 }

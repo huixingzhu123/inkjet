@@ -2,6 +2,7 @@ package com.zz.inkjet.repository;
 
 import com.zz.framework.repository.DefaultRepository;
 import com.zz.inkjet.domain.B_Contact_Msg;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,4 +14,7 @@ import java.util.List;
  */
 public interface B_Contact_MsgRepository extends DefaultRepository<B_Contact_Msg, String> {
     List<B_Contact_Msg> findAllByName(String nameValue);
+
+    @Transactional
+    void deleteBySystemidIn(String[] ids);
 }
