@@ -122,18 +122,24 @@
     </div>
     <section>
         <div>
-            <div id="toolbar-btn" class="btn-group pull-left" style="padding-bottom:10px;">
-                <select id="cartridgeType" value="InkCartridge" style="height: 34px;">
+            <!--<div id="toolbar-btn" class="btn-group pull-left" style="padding-bottom:10px;">-->
+                <!--<select id="cartridgeType" value="InkCartridge" style="height: 34px;">-->
+                    <!--<option value="InkCartridge">Ink Cartridge</option>-->
+                    <!--<option value="TonerCartridge">Toner Cartridge</option>-->
+                    <!--<option value="DrumCartridge">Drum Cartridge</option>-->
+                    <!--<option value="EmptyCartridge">Empty Cartridge</option>-->
+                <!--</select>-->
+            <!--</div>-->
+
+            <div class="pull-right" id="query-form" style="padding-bottom:10px;">
+                <select id="cartridgeType" value="InkCartridge" style="height: 34px;float:left;margin-right:10px;">
                     <option value="InkCartridge">Ink Cartridge</option>
                     <option value="TonerCartridge">Toner Cartridge</option>
                     <option value="DrumCartridge">Drum Cartridge</option>
                     <option value="EmptyCartridge">Empty Cartridge</option>
                 </select>
-            </div>
-
-            <div class="pull-right" id="query-form" style="padding-bottom:10px;">
                 <input id="itemId" name="itemId" placeholder='Item ID' type="text"
-                       style="float:left;width:150px;margin-right:5px;"
+                       style="float:left;width:150px;margin-right:10px;"
                        class="form-control">
                 <div style="float:left;margin-right:5px;">
                     <input id="oemCode" name="oemCode" placeholder='OEM Code' type="text"
