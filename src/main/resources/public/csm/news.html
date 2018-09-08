@@ -20,7 +20,7 @@
 	<![endif]-->
 </head>
 
-<body>
+<body onload="initNews()">
 	<!-- Fixed navbar -->
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
 		<div class="container">
@@ -57,11 +57,11 @@
 		<div class="row">
 			
 			<!-- Article main content -->
-			<article class="col-sm-9 maincontent pull-right">
-				<header class="page-header">
-					<h1 class="page-title">{#替换第一屏1}News</h1>
-				</header>
-				<h3>{#替换第一屏1.1}Our Company</h3>
+			<article class="col-sm-9 maincontent pull-right" id="newsDetail">
+				<!--<header class="page-header">
+					<h1 class="page-title">Detailed News</h1>
+				</header>-->
+				<!--<h3>{#替换第一屏1.1}Our Company</h3>
 				<p><img src="assets/images/2.jpg" alt="" class="img-rounded pull-left" width="300" > Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, consequuntur eius repellendus eos aliquid molestiae ea laborum ex Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam laudantium voluptates placeat consectetur quam aliquam beatae soluta accusantium iusto nihil nesciunt unde veniam magnam repudiandae sapiente.</p>
 				<p>Consectetur adipisicing elit. Eveniet, consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam laudantium voluptates placeat consectetur quam aliquam beatae soluta accusantium iusto nihil nesciunt unde veniam magnam repudiandae sapiente.</p>
 				<h3>{#替换第一屏1.2}Company Goals</h3>
@@ -71,7 +71,7 @@
 				<h3>{#替换第一屏1.4}Public News</h3>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam laudantium voluptates placeat consectetur quam aliquam beatae soluta accusantium iusto nihil nesciunt unde veniam magnam repudiandae sapiente., consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam laudantium voluptates placeat consectetur quam aliquam!</p>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam laudantium voluptates placeat consectetur quam aliquam beatae soluta accusantium iusto nihil nesciunt unde veniam magnam repudiandae sapiente.</p>
-				
+				-->
 			</article>
 			<!-- /Article -->
 			
@@ -79,13 +79,16 @@
 			<aside class="col-sm-3 sidebar sidebar-right">
 
 				<div class="panel">
-					<h4>{#替换第二屏1}Latest News</h4>
-					<ul class="list-unstyled list-spaces">
-						<li><a href="#">{#替换第二屏1.1}Responsive Design</a><br><span class="small text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, laborum.</span></li>
+					<h4>Latest News</h4>
+					<ul class="list-unstyled list-spaces" id="newsList">
+						<!--<li><a href="#">{#替换第二屏1.1}Responsive Design</a><br><span class="small text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, laborum.</span></li>
 						<li><a href="#">{#替换第二屏1.2}HTML5, CSS3 and JavaScript</a><br><span class="small text-muted">Consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam</span></li>
 						<li><a href="#">{#替换第二屏1.3}Bootstrap</a><br><span class="small text-muted">Eveniet, consequuntur eius repellendus eos aliquid molestiae ea</span></li>
 						<li><a href="#">{#替换第二屏1.4}Clean Template</a><br><span class="small text-muted">Sed, mollitia earum debitis est itaque esse reiciendis amet cupiditate.</span></li>
-						<li><a href="#">{#替换第二屏1.5}Premium Quality</a><br><span class="small text-muted">Voluptate minus illo tenetur sint ab in culpa cumque impedit quibusdam. Saepe, molestias quia.</span></li>
+						<li><a href="#">{#替换第二屏1.5}Premium Quality</a><br><span class="small text-muted">Voluptate minus illo tenetur sint ab in culpa cumque impedit quibusdam. Saepe, molestias quia.</span></li>-->
+					</ul>
+					<ul>
+						<a href="javascript:void(0)"><p onclick="getMoreNews()">--VIEW MORE--</p></a>
 					</ul>
 				</div>
 
@@ -108,7 +111,7 @@
 					</div>
 
 					<div class="col-md-4 panel contact"> 
-						<h3 class="panel-title">Contact Info</h4>
+						<h3 class="panel-title">Contact Info</h3>
 						<div class="panel-body">
 						<ul>
 						  <li><i class="fa fa-phone"></i> (00) 86 158 1272 3629</li>
@@ -177,5 +180,6 @@
 	<script src="assets/js/headroom.min.js"></script>
 	<script src="assets/js/jQuery.headroom.min.js"></script>
 	<script src="assets/js/custom.js"></script>
+	<script src="assets/js/frontnews.js"></script>
 </body>
 </html> 

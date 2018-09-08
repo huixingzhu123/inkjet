@@ -23,6 +23,24 @@ import javax.persistence.Table;
 public class News  extends AuditEntity {
     private String title;
     private String content;
+    private String author;
+    private String summary;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
 
     public String getTitle() {
         return title;

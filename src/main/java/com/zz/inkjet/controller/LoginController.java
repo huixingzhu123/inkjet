@@ -12,12 +12,11 @@ package com.zz.inkjet.controller;
 
 import com.zz.framework.result.pagination.Pagination;
 import com.zz.framework.result.pagination.PaginationSuccessDTO;
-import com.zz.inkjet.domain.B_Contact_Msg;
-import com.zz.inkjet.domain.Product;
-import com.zz.inkjet.domain.QueryProduct;
-import com.zz.inkjet.domain.User;
+import com.zz.inkjet.domain.*;
 import com.zz.inkjet.dto.MessageDto;
+import com.zz.inkjet.dto.NewsDto;
 import com.zz.inkjet.impl.B_Contact_MsgServiceImpl;
+import com.zz.inkjet.impl.NewsServiceImpl;
 import com.zz.inkjet.impl.ProductServiceImpl;
 import com.zz.inkjet.impl.UserServiceImpl;
 import org.apache.commons.logging.Log;
@@ -27,6 +26,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +49,9 @@ public class LoginController {
     public LoginController(UserServiceImpl userService) {
         this.userService = userService;
     }
+
+    @Autowired
+    public NewsServiceImpl newsService;
 
     @Autowired
     public ProductServiceImpl productService;
@@ -111,9 +114,30 @@ public class LoginController {
     }
 
     @RequestMapping("/news-table")
-    public String newsTable() {
-
+    public String newsTable(Model model,@RequestParam(value = "page", defaultValue = "0") Integer page,
+                            @RequestParam(value = "size", defaultValue = "10") Integer size,
+                            @RequestParam(value = "title", defaultValue = "") String title,
+                            @RequestParam(value = "startTime", defaultValue = "") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,
+                            @RequestParam(value = "endTime", defaultValue = "") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime
+                            ) {
+        NewsDto dto = new NewsDto();
+        dto.setTitle(title);
+        dto.setStartTime(startTime);
+        dto.setEndTime(endTime);
+        Page<News> datas = newsService.findNewsCriteria(page,size,dto);
+        model.addAttribute("datas", datas) ;
+        model.addAttribute("queryForm", dto);
         return "news-table";
+    }
+
+    @RequestMapping("/news-add")
+    public String newsTable(Model model, String systemid) {
+        News news = new News();
+        if (!StringUtils.isEmpty(systemid)) {
+            news = newsService.getBySystemid(systemid);
+        }
+        model.addAttribute("data", news);
+        return "news-add";
     }
 
     @RequestMapping(value = "/contact-table")
