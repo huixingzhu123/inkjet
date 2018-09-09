@@ -1,7 +1,5 @@
 package com.zz.inkjet.controller;
 
-import com.zz.demo.controller.DemoController;
-import com.zz.demo.domain.Demo;
 import com.zz.framework.domain.ListEntity;
 import com.zz.framework.exception.ValidException;
 import com.zz.framework.result.pagination.Pagination;
@@ -32,7 +30,7 @@ import java.util.Map;
 @RequestMapping(value = "/contact")
 public class B_Contact_MsgController {
 
-    private Log logger = LogFactory.getLog(DemoController.class);
+    private Log logger = LogFactory.getLog(B_Contact_MsgController.class);
 
     private final B_Contact_MsgServiceImpl b_Contact_MsgService;
 
@@ -113,7 +111,7 @@ public class B_Contact_MsgController {
      * @param entity 需要保存的实体
      * @return 保存后的实体
      */
-    @Logging(changeObject = Demo.class)
+    @Logging(changeObject = B_Contact_MsgController.class)
     @RequestMapping(value = "/contact/{systemid}", method = RequestMethod.PUT, consumes = "application/json")
     public ResponseEntity update(@PathVariable("systemid") String systemid,
                                  @RequestBody @Valid B_Contact_Msg entity, BindingResult result) throws Exception {
@@ -132,7 +130,7 @@ public class B_Contact_MsgController {
      *
      * @param entity 更新内容
      */
-    @Logging(changeObject = Demo.class)
+    @Logging(changeObject = B_Contact_MsgController.class)
     @RequestMapping(value = "/patch-msg", method = RequestMethod.PUT,consumes = "application/sino-patch")
     public ResponseEntity patchUpdate(@RequestBody @Valid B_Contact_Msg entity, BindingResult result) throws Exception {
         if (result.hasErrors()) {

@@ -29,7 +29,7 @@ function searchNews() {
 function deleteByIds(ids) {
     var res = false;
     $.ajax({
-        url: "/news/news/" + ids,
+        url:  getContextPath() + "/news/news/" + ids,
         type: "DELETE",
         data: '',
         dataType: "json",
@@ -116,10 +116,10 @@ function save() {
     var reqUrl = "";
     if (systemid == "") {
         method = "POST";
-        reqUrl = "/news/News";
+        reqUrl = getContextPath() + "/news/News";
     } else {
         method = "PUT";
-        reqUrl = "/news/news/" + systemid;
+        reqUrl =  getContextPath() + "/news/news/" + systemid;
     }
 
     $.ajax({
@@ -140,4 +140,15 @@ function save() {
 
 function closeWindow() {
     window.close();
+}
+
+/**
+ *js获取上下文
+ * */
+function getContextPath() {
+    var contextPath = document.location.pathname;
+    var index = contextPath.substr(1).indexOf("/");
+    contextPath = contextPath.substr(0, index + 1);
+    delete index;
+    return contextPath;
 }

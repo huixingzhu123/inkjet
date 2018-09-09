@@ -52,7 +52,7 @@ import java.util.stream.Collectors;
  */
 @Aspect
 @Component
-@PropertySource(value = {"logging.properties"}, encoding = "utf-8")
+@PropertySource(value = {"classpath:logging.properties"}, encoding = "utf-8")
 public class LoggingAspect {
 
     private Log logger = LogFactory.getLog(LoggingAspect.class);

@@ -26,7 +26,7 @@ function sendMsg() {
     msg = formValidate(name, email, message);
     if (msg == "" ) {
         $.ajax({
-            url: "/contact/contacts",
+            url: "/inkjet/contact/contacts",
             type: "POST",
             contentType:'application/json;charset=UTF-8',
             data: JSON.stringify({'name': name, 'email':email , 'message':message}),

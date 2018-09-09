@@ -7,7 +7,7 @@ function initNews() {
 
 function showNewsList() {
     $("#newsList").text("");
-    var url = "/news/news";
+    var url = "/inkjet/news/news";
     var method = "GET";
     $.ajax({
         url: url,
@@ -61,7 +61,7 @@ function replaceDetailNews(obj){
 
 function getMoreNews() {
     newsPageNumber = newsPageNumber + 1;
-    var url = "/news/news";
+    var url = "/inkjet/news/news";
     var method = "POST";
     $.ajax({
         url: url,

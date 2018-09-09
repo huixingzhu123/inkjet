@@ -18,6 +18,7 @@ import com.zz.inkjet.dto.NewsDto;
 import com.zz.inkjet.impl.NewsServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,6 +74,7 @@ public class NewsController {
             //抛出异常，修改不能调用此方法
             throw new Exception("修改不能调用此方法。请使用[PUT]请求。");
         }
+        System.out.println("新增走这里----》");
         //创建完成返回201状态码created
         return ResponseEntity.status(HttpStatus.CREATED).body(newsService.batchSave(entityList.getList()));
     }
@@ -87,7 +89,14 @@ public class NewsController {
             throw new Exception("[" + systemid + "]找不到对应实体。");
         }
         entity.setSystemid(systemid);
-        return ResponseEntity.ok(newsService.update(entity));
+        System.out.println("修改走这里！");
+        News news = null;
+        try {
+            news = newsService.update(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(news);
     }
 
     @RequestMapping(value = "/news/{ids}", method = RequestMethod.DELETE)

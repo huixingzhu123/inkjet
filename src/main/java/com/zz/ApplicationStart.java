@@ -13,6 +13,9 @@ package com.zz;
 import com.zz.framework.util.ApplicationContextUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -22,11 +25,15 @@ import org.springframework.context.annotation.PropertySource;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.zz"})
-@PropertySource(value = {"classpath:${spring.profiles.active}/database.properties", "classpath:${spring.profiles.active}/application.properties"},encoding = "utf-8")
-public class ApplicationStart {
+@ServletComponentScan
+public class ApplicationStart extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(ApplicationStart.class);
+    }
+
     public static void main(String[] args) {
         ApplicationContext applicationContext = SpringApplication.run(ApplicationStart.class, args);
-        //设置上下文对象
-        ApplicationContextUtil.setApplicationContext(applicationContext);
     }
 }

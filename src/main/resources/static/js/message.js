@@ -30,7 +30,7 @@ function searchMsg() {
 function deleteByIds(ids) {
     var res = false;
     $.ajax({
-        url: "/contact/contact/" + ids,
+        url: getContextPath() + "/contact/contact/" + ids,
         type: "DELETE",
         data: '',
         dataType: "json",
@@ -94,4 +94,15 @@ function checkAll(obj) {
             $(this).prop("checked", false);
         });
     }
+}
+
+/**
+ *js获取上下文
+ * */
+function getContextPath() {
+    var contextPath = document.location.pathname;
+    var index = contextPath.substr(1).indexOf("/");
+    contextPath = contextPath.substr(0, index + 1);
+    delete index;
+    return contextPath;
 }

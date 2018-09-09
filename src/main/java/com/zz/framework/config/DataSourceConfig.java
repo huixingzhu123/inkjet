@@ -24,7 +24,7 @@ public class DataSourceConfig {
 
     @Bean(name = "defaultDatasource")
     @Qualifier("defaultDatasource")
-    @ConfigurationProperties(prefix = "spring.datasource.default")
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource defaultDatasource() {
         DataSource defaultDatasource = DruidDataSourceBuilder.create().build();
         logger.info("[bean]defaultDatasource实例化。");

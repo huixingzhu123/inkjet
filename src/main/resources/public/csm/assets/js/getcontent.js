@@ -17,7 +17,7 @@ function getMoreProducts() {
     var page = number + 1;
 
     $.ajax({
-        url: "/Product/getProduct",
+        url: "/inkjet/Product/getProduct",
         type: "POST",
         data: {'kind': kind, 'itemId':itemId , 'oemCode':oemCode , 'suitableMachine':suitableMachine, 'page': page },
         dataType: "json",
@@ -60,7 +60,7 @@ function getMoreProducts() {
 
 function getProducts(kind) {
     $.ajax({
-        url: "/Product/getProduct",
+        url: "/inkjet/Product/getProduct",
         type: "POST",
         data: {'kind': kind},
         dataType: "json",
@@ -107,7 +107,7 @@ function getMore() {
     var page = number + 1;
     var kind = document.getElementById("cartridgeType").value;
     $.ajax({
-        url: "/Product/getProduct",
+        url: "/inkjet/Product/getProduct",
         type: "POST",
         data: {'kind': kind, 'page': page},
         dataType: "json",

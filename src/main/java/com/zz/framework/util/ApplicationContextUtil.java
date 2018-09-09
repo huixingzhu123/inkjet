@@ -1,6 +1,9 @@
 package com.zz.framework.util;
 
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 /**
  * 上下文工具类
@@ -8,7 +11,8 @@ import org.springframework.context.ApplicationContext;
  * @author yanjunhao
  * @date 2017.09.29
  */
-public class ApplicationContextUtil {
+@Component
+public class ApplicationContextUtil implements ApplicationContextAware {
     private static ApplicationContext applicationContext;
 
     /**
@@ -25,9 +29,11 @@ public class ApplicationContextUtil {
      *
      * @param applicationContext
      */
-    public static void setApplicationContext(ApplicationContext applicationContext) {
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         ApplicationContextUtil.applicationContext = applicationContext;
     }
+
 
     /**
      * 通过名字获取上下文中的bean
