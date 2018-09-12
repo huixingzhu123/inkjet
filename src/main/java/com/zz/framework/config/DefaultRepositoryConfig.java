@@ -27,7 +27,6 @@ import java.util.Map;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware",dateTimeProviderRef = "springSecurityAuditorAware")
 @EnableJpaRepositories(
         entityManagerFactoryRef = "defaultEntityManagerFactory",
         transactionManagerRef = "defaultTransactionManager",

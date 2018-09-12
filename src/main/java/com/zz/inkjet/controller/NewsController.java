@@ -27,6 +27,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +55,8 @@ public class NewsController {
             //抛出异常，修改不能调用此方法
             throw new Exception("修改不能调用此方法。请使用[PUT]请求。");
         }
+        entity.setCreatedTime(new Date());
+        entity.setLastUpdatedTime(new Date());
         //创建完成返回201状态码created
         return ResponseEntity.status(HttpStatus.CREATED).body(newsService.save(entity));
     }
@@ -74,7 +77,6 @@ public class NewsController {
             //抛出异常，修改不能调用此方法
             throw new Exception("修改不能调用此方法。请使用[PUT]请求。");
         }
-        System.out.println("新增走这里----》");
         //创建完成返回201状态码created
         return ResponseEntity.status(HttpStatus.CREATED).body(newsService.batchSave(entityList.getList()));
     }
@@ -89,8 +91,10 @@ public class NewsController {
             throw new Exception("[" + systemid + "]找不到对应实体。");
         }
         entity.setSystemid(systemid);
-        System.out.println("修改走这里！");
-        News news = null;
+        News news = newsService.getBySystemid(systemid);
+
+        entity.setCreatedTime(news.getCreatedTime());
+        entity.setLastUpdatedTime(new Date());
         try {
             news = newsService.update(entity);
         } catch (Exception e) {

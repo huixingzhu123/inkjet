@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -86,6 +87,7 @@ public class B_Contact_MsgController {
             //抛出异常，修改不能调用此方法
             throw new Exception("修改不能调用此方法。请使用[PUT]请求。");
         }
+        entity.setCreatedTime(new Date());
         //创建完成返回201状态码created
         return ResponseEntity.status(HttpStatus.CREATED).body(b_Contact_MsgService.save(entity));
     }
@@ -124,21 +126,6 @@ public class B_Contact_MsgController {
         entity.setSystemid(systemid);
         return ResponseEntity.ok(b_Contact_MsgService.update(entity));
     }
-
-    /**
-     * Put请求-部分更新
-     *
-     * @param entity 更新内容
-     */
-    @Logging(changeObject = B_Contact_MsgController.class)
-    @RequestMapping(value = "/patch-msg", method = RequestMethod.PUT,consumes = "application/sino-patch")
-    public ResponseEntity patchUpdate(@RequestBody @Valid B_Contact_Msg entity, BindingResult result) throws Exception {
-        if (result.hasErrors()) {
-            throw new ValidException(result);
-        }
-        return ResponseEntity.ok(b_Contact_MsgService.update(entity));
-    }
-
 
     /**
      * 物理删除

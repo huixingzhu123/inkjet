@@ -19,7 +19,6 @@ import java.util.Date;
  * @date 2017.10.09
  */
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 public class AuditEntity extends com.zz.framework.domain.BaseEntity {
 
 

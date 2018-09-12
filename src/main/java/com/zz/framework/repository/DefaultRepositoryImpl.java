@@ -1,6 +1,5 @@
 package com.zz.framework.repository;
 
-import com.zz.framework.security.SpringSecurityAuditorAware;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SQLQuery;
@@ -81,20 +80,6 @@ public class DefaultRepositoryImpl<T, ID extends Serializable>
         //表字段
         Path<String> deleteflag = root.get("deleteflag");
         Path<String> systemid = root.get("systemid");
-        //审批字段赋值，因为实体不一定继承审批类，所以捕获一下异常
-        try {
-            Path<Date> lastUpdatedTime = root.get("lastUpdatedTime");
-            Path<String> lastUpdatedBy = root.get("lastUpdatedBy");
-
-            //实体审计功能类
-            SpringSecurityAuditorAware auditorAware = new SpringSecurityAuditorAware();
-            //设置最后更新人
-            update.set(lastUpdatedBy, auditorAware.getCurrentAuditor());
-            //设置最后更新时间
-            update.set(lastUpdatedTime, auditorAware.getNow().getTime());
-        } catch (IllegalArgumentException e) {
-            logger.debug("不包含审计字段。");
-        }
 
         //设置删除标志为1
         update.set(deleteflag, "1");

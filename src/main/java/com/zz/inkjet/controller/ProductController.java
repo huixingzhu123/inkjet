@@ -26,6 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +54,8 @@ public class ProductController {
             //抛出异常，修改不能调用此方法
             throw new Exception("修改不能调用此方法。请使用[PUT]请求。");
         }
+        entity.setCreatedTime(new Date());
+        entity.setLastUpdatedTime(new Date());
         //创建完成返回201状态码created
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(entity));
     }
@@ -80,6 +83,9 @@ public class ProductController {
         if (null == productService.getBySystemid(systemid)) {
             throw new Exception("[" + systemid + "]找不到对应实体。");
         }
+        Product product = productService.getBySystemid(systemid);
+        entity.setCreatedTime(product.getCreatedTime());
+        entity.setLastUpdatedTime(new Date());
         entity.setSystemid(systemid);
         return ResponseEntity.ok(productService.update(entity));
     }
